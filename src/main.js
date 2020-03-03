@@ -2,9 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
+import vueJsonp from 'vue-jsonp'
 
+Vue.use(vueJsonp)
 Vue.prototype.$axios = axios;
 Vue.prototype.$webAppId = 7342480;
+Vue.prototype.$author = '©Сергей Киселёв'
 Vue.prototype.$user_id = null;
 Vue.prototype.$verVK = 5.103;
 /*

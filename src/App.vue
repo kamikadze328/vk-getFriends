@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <header>
-        <div id="author" class="text">{{author}}</div>
-        <!--<a class="header-logo" href="https://vk.com">
-          <img src="./assets/vk-logo.png" alt="vk logo">
-        </a>-->
+        <div id="author">{{author}}</div>
         <a class="header-logo" href="https://se.ifmo.ru/courses/web">
           <img src="./assets/itmo-logo.png" alt="itmo logo">
         </a>
@@ -21,7 +18,7 @@
     name: 'App',
     data() {
       return {
-        author: '©Сергей Киселёв'
+        author: this.$author
       }
     }
   }
@@ -88,6 +85,7 @@
     justify-content: center;
     align-items: center;
   }
+
 
   footer {
       padding: 3.0vh 0 2.0vh 0;

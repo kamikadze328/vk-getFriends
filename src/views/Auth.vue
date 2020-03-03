@@ -27,10 +27,10 @@ export default {
   methods:
     {
       auth: function () {
+        this.$author = 'elell';
         this.isRedirect = true;
       }
-    }
-
+    },
 }
 </script>
 
