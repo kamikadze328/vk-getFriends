@@ -23,11 +23,11 @@
       }
     },
     mounted () {
-      localStorage.setItem('access_token', 'ab79a3d9e5c99b22258595452be3231e265ee88a32556780052e2fa8a3b742814140e408e471ad859c001')
-      localStorage.setItem('user_id', '141506085');
+      //localStorage.setItem('access_token', 'ab79a3d9e5c99b22258595452be3231e265ee88a32556780052e2fa8a3b742814140e408e471ad859c001')
+      //localStorage.setItem('user_id', '141506085');
       localStorage.setItem('state', this.getState());
-      console.log(window.location.href);
-      if(!this.$BaseURL.includes('localhost')) this.$BaseURL = window.location.href;
+
+      if(!window.location.href.includes('localhost')) this.$BaseURL = window.location.href;
       const url = "https://oauth.vk.com/authorize?client_id=" + this.$webAppId + "&display=page&redirect_uri=" + this.$BaseURL + "&scope=friends,offline&response_type=token&v="+ this.$verVK+"&state=" + localStorage.getItem('state');
       setTimeout(() => window.location = url, 3150);
       setTimeout(() => this.redirectSeconds--, 1000);

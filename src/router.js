@@ -4,8 +4,8 @@ import Auth from '@/views/Auth'
 import Main from '@/views/Main'
 
 Vue.use(Router);
-//let urlOnHelios = '/~s264434/cv/';
-let urlOnHelios = '/';
+let urlOnHelios = '/~s264434/cv/';
+//let urlOnHelios = '/';
 
 const router = new Router({
   mode: 'history',
@@ -26,8 +26,12 @@ const router = new Router({
 
           } else next({ name: 'auth' });
 
-        } else next();
-
+        } else {
+          if((to.path && to.path.substring(to.path.length-1, to.path.length)!=='/')
+            /*|| to.path.substring(to.path.length-1, to.path.length)!=='#'*/) next(urlOnHelios);
+          else next();
+        }
+      //TODO access denied and catch error
         localStorage.removeItem('state');
       }
     },
@@ -43,16 +47,26 @@ const router = new Router({
     {
       path: urlOnHelios + '*',
       redirect: urlOnHelios
-    }
+    },
+    {
+      path: '*',
+      redirect: urlOnHelios
+    },
   ]
 });
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!localStorage.getItem('access_token')) {
+    if (localStorage.getItem('access_token') && localStorage.getItem('access_token') !== 'access_denied') {
+      next()
+    } else {
+      localStorage.removeItem('user_id')
+      localStorage.removeItem('access_token')
       next({ name: 'auth' })
-    } else next();
-  } else next();
+    }
+  } else next()
 });
+
+
 
 export default router;

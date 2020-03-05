@@ -1,12 +1,8 @@
 <template>
     <div class="content">
-      <div class="text" id="title">
-        <span>Опа, а Друзей-то Вы и не ждали</span>
-      </div>
-      <div class="text" id="description">
-        <span>Авторизируйтесь через VK и узнайте, каких друзей вы точно не ожидали тут увидеть</span>
-      </div>
-      <Redirect class="vk-text" v-if="isRedirect"></Redirect>
+      <Title/>
+      <Description v-bind:isMain="fasle"/>
+      <Redirect v-if="isRedirect" class="vk-text" ></Redirect>
       <button v-else class="button" id="auth-button" @click="auth">
         Войти через VK
       </button>
@@ -16,6 +12,8 @@
 <script>
 
 import Redirect from '../components/Redirect'
+import Title from '../components/Title'
+import Description from '../components/Description'
 export default {
   name: "Auth",
   data () {
@@ -23,11 +21,10 @@ export default {
       isRedirect: false
     }
   },
-  components: { Redirect },
+  components: { Description, Title, Redirect },
   methods:
     {
       auth: function () {
-        this.$author = 'elell';
         this.isRedirect = true;
       }
     },
@@ -60,25 +57,15 @@ export default {
       border-radius: 4px;
       box-sizing: border-box;
     }
-
-    .text{
-      width: 100%;
-      position: relative;
-      display: flex;
-      flex-shrink: 1;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
     .vk-text{
-
+      margin: 1.0vh 0 2.0vh 0;
+      height: calc((100vw - 460px)/490*11 + 44px);
     }
-    #title {
-      font-size: calc((100vw - 460px) / (950 - 460) * (30 - 21) + 21px);
-      font-weight: 900;
-    }
-    #description {
-      font-size: calc((100vw - 460px) / (950 - 460) * (18 - 14) + 14px);
-      opacity: .5;
+    @media (min-width: 950px) {
+      #auth-button, .vk-text {
+        font-size: 18px;
+        width: 190px;
+        height: 56px;
+      }
     }
 </style>
