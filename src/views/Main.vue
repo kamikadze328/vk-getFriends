@@ -32,7 +32,7 @@ export default {
       token: null,
       user_id:null,
       user_info:{first_name:'Лапушка'},
-      isMobile: false
+      isMobile: false,
     }
   },
   methods: {
@@ -64,27 +64,28 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    isMobileFunc: function () {
+      const w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('body')[0],
+        x = w.innerWidth || e.clientWidth || g.clientWidth;
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)
+        || Number(x) < 500)
+        this.isMobile = true
     }
   },
   mounted () {
-    const w = window,
-      d = document,
-      e = d.documentElement,
-      g = d.getElementsByTagName('body')[0],
-      x = w.innerWidth || e.clientWidth || g.clientWidth;
-      //y = w.innerHeight || e.clientHeight || g.clientHeight;
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)
-      || Number(x) < 500)
-      this.isMobile = true
-
-    if (!localStorage.getItem('access_token') || localStorage.getItem('access_token') === 'access_denied')
+    this.isMobileFunc()
+    if (!localStorage.getItem('access_token')
+      || localStorage.getItem('access_token') === 'access_denied'
+      || !localStorage.getItem('user_id'))
       this.$router.push({ name: 'auth' })
     this.token = localStorage.getItem('access_token')
     this.user_id = localStorage.getItem('user_id')
-    if (localStorage.getItem('user_id')) {
-      this.getUserInfo()
-      this.getListFriends()
-    }
+    this.getUserInfo()
+    this.getListFriends()
   },
 }
 </script>
@@ -100,9 +101,7 @@ export default {
   }
   @media (min-width: 500px) {
     .friends_list {
-      max-width: 355px;
-      justify-content: space-around;
-      height: 100%;
+      max-width: 500px;
     }
   }
 </style>

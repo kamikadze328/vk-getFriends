@@ -2,9 +2,8 @@
   <div class="item">
     <div class="itemAvatar">
       <div class="OwnerAvatar">
-        <a class="avatar_link" :href="'https://vk.com/id' + friend.id">
+        <a class="avatar_link" :class="{'online':friend.online>0}" :href="'https://vk.com/id' + friend.id">
           <img class="avatar_img" :src="friend.photo_50" :alt="friend.first_name">
-          <div class="avatar_online"></div>
         </a>
       </div>
     </div>
@@ -33,10 +32,6 @@
 
 <style scoped>
   .item {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  .item {
     margin: 0;
     padding: 6px 12px;
     border: 0;
@@ -44,17 +39,17 @@
     box-sizing: border-box;
     display: table;
     position: relative;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Segoe WP,Helvetica Neue,Lucida Grande,Verdana,Tahoma,Arial,sans-serif!important;
   }
   .avatar_img {
-    min-width: 44px;
-    min-height: 44px;
+    width: 44px;
+    height: 44px;
     border-radius: 100%;
   }
 
   .itemAvatar {
     display: table-cell;
     vertical-align: top;
-    padding: 0 12px 0 0;
   }
   .OwnerAvatar {
     position: relative;
@@ -70,7 +65,7 @@
     width: 100%;
     box-sizing: border-box;
     word-break: break-word;
-    padding: 0 8px 0 0;
+    padding: 0 8px 0 12px;
   }
   .itemBody .si_owner {
     height: 40px;
@@ -102,7 +97,19 @@
     height: 24px;
     background-size: 24px 24px;
     background-image: url(../assets/mailIcom.png);
-
+  }
+  .online:after {
+    right: 3%;
+    bottom: 3%;
+    border: solid 2px #fff;
+    width: 8px;
+    height: 8px;
+  }
+  .online:after {
+    content: '';
+    position: absolute;
+    background-color: #8ac176;
+    border-radius: 50%;
   }
 
   a {

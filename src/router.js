@@ -27,11 +27,10 @@ const router = new Router({
           } else next({ name: 'auth' });
 
         } else {
-          if((to.path && to.path.substring(to.path.length-1, to.path.length)!=='/')
-            /*|| to.path.substring(to.path.length-1, to.path.length)!=='#'*/) next(urlOnHelios);
+          if (to.path && to.path.substring(to.path.length - 1, to.path.length) !== '/') next(urlOnHelios);
           else next();
         }
-      //TODO access denied and catch error
+        //TODO access denied and catch error
         localStorage.removeItem('state');
       }
     },

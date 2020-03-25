@@ -54,9 +54,11 @@
     color: #2a5885;
   }
 
-  a{
-    padding: 0.5vh 0;
+  a:first-child{
+    padding-bottom: 0.5vh;
   }
+
+
   @media (min-width: 950px) {
     #description {
       font-size: 21px;
